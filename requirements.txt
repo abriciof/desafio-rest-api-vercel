@@ -9,3 +9,4 @@ django-cors-headers
 google-auth
 requests
 whitenoise
+dj-database-url
