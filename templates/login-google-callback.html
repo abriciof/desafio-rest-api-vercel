@@ -1,0 +1,47 @@
+<!-- templates/login-callback.html -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Callback Google</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 2em; }
+    pre { background: #f4f4f4; padding: 1em; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <h2>Autenticando com Google...</h2>
+  <pre id="result">Aguarde...</pre>
+
+  <script>
+    (async function() {
+      // 1) Extrai o ID Token da parte hash da URL
+      const hash = window.location.hash.substring(1);
+      const params = new URLSearchParams(hash);
+      const idToken = params.get('id_token');
+      if (!idToken) {
+        document.getElementById('result').innerText = 
+          JSON.stringify({ error: 'ID token não encontrado' }, null, 2);
+        return;
+      }
+
+      // 2) Troca pelo JWT da API
+      try {
+        const resp = await fetch('/api/auth/google/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id_token: idToken })
+        });
+        const data = await resp.json();
+
+        document.getElementById('result').innerText = 
+          JSON.stringify(data, null, 4);
+
+      } catch(err) {
+        document.getElementById('result').innerText = 
+          JSON.stringify({ error: err.detail || err }, null, 4);
+      }
+    })();
+  </script>
+</body>
+</html>
