@@ -4,12 +4,8 @@ from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 
 def send_confirmation_email(to_email: str, token: str):
-    """
-    Envia um link de confirmação para o usuário.
-    """
     subject = "Confirme seu e-mail"
 
-    # URL do front-end ou rota que você expõe para verificação:
     confirm_url = (
         f"{settings.API_BASE_URL}/api/auth/email/verify-token/"
         f"?email={to_email}&token={token}"

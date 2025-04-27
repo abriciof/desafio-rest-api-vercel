@@ -21,7 +21,7 @@ class RegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = [
-            "username",      # agora obrigatório
+            "username",
             "email",
             "first_name",
             "last_name",
@@ -117,7 +117,4 @@ class VerifyEmailTokenSerializer(serializers.Serializer):
     
     
 class GoogleAuthSerializer(serializers.Serializer):
-    """
-    Recebe o ID-token JWT do Google.
-    """
     id_token = serializers.CharField(write_only=True, required=True)

@@ -54,6 +54,9 @@ Este repositório contém uma **API RESTful** construída com **Django 4.x** e *
 
     # Banco de Dados - Link Supabase Postgres
     DATABASE_URL=
+
+    # Blob Vercel
+    BLOB_READ_WRITE_TOKEN=
     ```
 
 5. **Execute** migrações e crie usuário admin:

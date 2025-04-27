@@ -40,7 +40,8 @@ urlpatterns = [
     path("api/auth/", include("users.urls_auth")),
     path("api/users/", include("users.urls_profile")),
     path("api/items/", include("items.urls")),
-
+    path("api/uploads/", include("uploads.urls")),
+    
     # Swagger e Redoc
     path("", RedirectView.as_view(url="swagger/")),
     path("swagger(<format>\.json|\.yaml)",schema_view.without_ui(cache_timeout=0), name="schema-json"),
@@ -48,5 +49,5 @@ urlpatterns = [
     path("redoc/", schema_view.with_ui("redoc", cache_timeout=0), name="schema-redoc"),
 
     # Termos de Uso e Política de Privacidade
-    path("api/docs/", include("common.urls")),
+    path("api/docs/", include("common.urls"))
 ]

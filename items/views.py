@@ -8,10 +8,6 @@ from .serializers import ItemSerializer
 
 
 class ItemListView(generics.ListAPIView):
-    """
-    GET /api/items/
-    Lista apenas itens públicos.
-    """
     queryset = Item.objects.filter(is_public=True)
     serializer_class = ItemSerializer
     permission_classes = [permissions.AllowAny]
@@ -23,10 +19,6 @@ class ItemListView(generics.ListAPIView):
 
 
 class ItemRestrictedListView(generics.ListAPIView):
-    """
-    GET /api/items/restricted/
-    Mesma listagem, mas só para usuários com e-mail confirmado.
-    """
     serializer_class = ItemSerializer
     permission_classes = [permissions.IsAuthenticated]
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]

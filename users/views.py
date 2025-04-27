@@ -24,8 +24,6 @@ from .serializers import (
     UserSerializer,
     LoginSerializer,
     TokenSerializer,
-    EmailTokenSerializer,
-    VerifyEmailTokenSerializer,
     GoogleAuthSerializer
 )
 from .utils.emailer import send_confirmation_email
@@ -80,21 +78,15 @@ class LoginView(APIView):
                 status=status.HTTP_401_UNAUTHORIZED,
             )
 
-        # Gera e retorna só o access token
         token = AccessToken.for_user(user)
         return Response({"token": str(token)}, status=status.HTTP_200_OK)
     
 
 class LogoutView(APIView):
-    """
-    POST /api/auth/logout/
-    Recebe o access token no Authorization header e revoga por JTI.
-    """
     permission_classes = [permissions.IsAuthenticated]
     http_method_names = ["post"]
 
     def post(self, request):
-        # extrai o token do header
         auth = request.headers.get("Authorization", "")
         if not auth.lower().startswith("bearer "):
             return Response(
@@ -103,7 +95,6 @@ class LogoutView(APIView):
             )
         token_str = auth.split()[1]
 
-        # valida estrutura antes de extrair jti
         try:
             token = UntypedToken(token_str)
         except (InvalidToken, TokenError):
@@ -113,16 +104,11 @@ class LogoutView(APIView):
             )
 
         jti = token.get(api_settings.JTI_CLAIM)
-        # grava no blacklist
         BlacklistedToken.objects.get_or_create(jti=jti)
         return Response(status=status.HTTP_204_NO_CONTENT)
     
 
 class SendEmailTokenView(APIView):
-    """
-    GET /api/auth/email/send-token/
-    Gera e envia um token de confirmação para o e-mail do usuário logado.
-    """
     permission_classes = [permissions.IsAuthenticated]
     http_method_names = ["get"]
 
@@ -130,10 +116,8 @@ class SendEmailTokenView(APIView):
         user = request.user
         email = user.email
 
-        # Gera o token único para este usuário
         token = default_token_generator.make_token(user)
 
-        # Envia o e-mail (usa seu utilitário de SMTP configurado)
         send_confirmation_email(email, token)
 
         return Response(
@@ -143,10 +127,6 @@ class SendEmailTokenView(APIView):
     
 
 class VerifyEmailTokenView(APIView):
-    """
-    GET /api/auth/email/verify-token/?email=<>&token=<>
-    Verifica o token e marca email_confirmed=True.
-    """
     permission_classes = [permissions.AllowAny]
     http_method_names = ["get"]
 
@@ -209,12 +189,7 @@ class VerifyEmailTokenView(APIView):
 
 
 class GoogleAuthView(APIView):
-    """
-    POST /api/auth/google/
-    Body: { "id_token": "<JWT_emitido_pelo_Google>" }
-    Retorna: { "token": "<seu_JWT_com_6h_de_vida>" }
-    """
-    authentication_classes = []       # sem JWT aqui
+    authentication_classes = []
     permission_classes = [permissions.AllowAny]
     http_method_names = ["post", "get"]
 
@@ -227,7 +202,6 @@ class GoogleAuthView(APIView):
         serializer.is_valid(raise_exception=True)
         id_token_str = serializer.validated_data["id_token"]
 
-        # 1) valida o ID-Token junto ao Google
         try:
             idinfo = google_id_token.verify_oauth2_token(
                 id_token_str,
@@ -240,7 +214,6 @@ class GoogleAuthView(APIView):
                 status=status.HTTP_400_BAD_REQUEST
             )
 
-        # 2) somente permite e-mails verificados pelo Google
         if not idinfo.get("email_verified", False):
             return Response(
                 {"detail": "E-mail não verificado pelo Google."},
@@ -248,7 +221,6 @@ class GoogleAuthView(APIView):
             )
 
         email = idinfo["email"]
-        # 3) get_or_create do usuário local
         user, created = User.objects.get_or_create(
             email=email,
             defaults={
@@ -256,11 +228,10 @@ class GoogleAuthView(APIView):
                 "first_name": idinfo.get("given_name", ""),
                 "last_name": idinfo.get("family_name", ""),
                 "profile_image": idinfo.get("picture", ""),
-                "email_confirmed": True,   # já confirmado
+                "email_confirmed": True
             }
         )
 
-        # 4) gera seu JWT padrão (6h)
         token = AccessToken.for_user(user)
         return Response({"token": str(token)}, status=status.HTTP_200_OK)
 

@@ -10,13 +10,11 @@
   </button>
 
   <script>
-    // Client ID injetado pelo Django
     const clientId    = "{{ GOOGLE_OAUTH2_CLIENT_ID }}";
     const redirectUri= window.location.origin + "/login-callback/";
     const scope      = "openid email profile";
     const nonce      = Math.random().toString(36).substring(2);
 
-    // Registro do SW para injeção de JWT
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('/static/sw.js')
         .then(() => console.log('Service Worker registrado.'))
@@ -34,12 +32,10 @@
       window.open(authUrl, 'google_login', 'width=500,height=600');
     });
 
-    // Recebe ID Token do popup
     window.addEventListener('message', async event => {
       if (event.origin !== window.location.origin) return;
       if (event.data && event.data.type === 'ID_TOKEN') {
         const idToken = event.data.idToken;
-        // Troca pelo JWT da API
         try {
           const res = await fetch('/api/auth/google/', {
             method: 'POST',
@@ -48,7 +44,6 @@
           });
           const data = await res.json();
           if (!res.ok) throw data;
-          // Envia JWT ao SW e redireciona ao Swagger
           const sw = await navigator.serviceWorker.ready;
           sw.active.postMessage({ type:'SET_JWT', token: data.token });
           window.location.href = '/swagger/';

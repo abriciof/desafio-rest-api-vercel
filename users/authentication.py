@@ -3,10 +3,6 @@ from rest_framework_simplejwt.exceptions import AuthenticationFailed
 from .models import BlacklistedToken
 
 class CustomJWTAuthentication(JWTAuthentication):
-    """
-    Além da checagem normal do simplejwt, rejeita
-    qualquer token cujo jti esteja na BlacklistedToken.
-    """
     def get_validated_token(self, raw_token):
         validated_token = super().get_validated_token(raw_token)
         jti = validated_token.get("jti")

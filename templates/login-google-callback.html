@@ -15,7 +15,6 @@
 
   <script>
     (async function() {
-      // 1) Extrai o ID Token da parte hash da URL
       const hash = window.location.hash.substring(1);
       const params = new URLSearchParams(hash);
       const idToken = params.get('id_token');
@@ -25,7 +24,6 @@
         return;
       }
 
-      // 2) Troca pelo JWT da API
       try {
         const resp = await fetch('/api/auth/google/', {
           method: 'POST',

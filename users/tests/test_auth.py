@@ -69,6 +69,5 @@ class AuthTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_verify_email_token_fail(self):
-        # Sem token correto
         response = self.client.get(self.verify_token_url, {"email": "wrong@example.com", "token": "abc"}, format='json')
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)

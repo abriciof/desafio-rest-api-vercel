@@ -113,6 +113,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'core.wsgi.application'
 
+VERCEL_BLOB_UPLOAD_URL = os.getenv("VERCEL_BLOB_UPLOAD_URL")
+VERCEL_BLOB_AUTH_TOKEN = os.getenv("VERCEL_BLOB_AUTH_TOKEN")
+
 DATABASES = {
     'default': dj_database_url.config(
         default=os.environ.get('DATABASE_URL')
