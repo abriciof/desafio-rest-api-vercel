@@ -28,7 +28,7 @@ from .serializers import (
     VerifyEmailTokenSerializer,
     GoogleAuthSerializer
 )
-from users.utils.emailer import send_confirmation_email
+from .utils.emailer import send_confirmation_email
 from django.conf import settings
 
 
@@ -55,6 +55,7 @@ class UserDetailView(generics.RetrieveUpdateAPIView):
 
     def get_object(self):
         return self.request.user
+
 
 class LoginView(APIView):
     permission_classes = []

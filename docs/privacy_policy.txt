@@ -1,0 +1,44 @@
+POLÍTICA DE PRIVACIDADE
+
+1. INTRODUÇÃO  
+   Esta Política de Privacidade explica como coletamos, usamos, processamos e protegemos os dados pessoais dos Usuários da API.
+
+2. DADOS COLETADOS  
+   2.1. Informações de cadastro: e-mail, nome, foto de perfil.  
+   2.2. Dados de uso: logs de acesso, endpoints consumidos e parâmetros de requisição.  
+   2.3. Cookies e tecnologias semelhantes, quando houver front-end associado.
+
+3. FINALIDADE DO TRATAMENTO  
+   3.1. Autenticação e autorização de Usuário.  
+   3.2. Melhoria do serviço, monitoramento de desempenho e detecção de fraudes.  
+   3.3. Comunicação de notificações importantes (por exemplo, confirmação de e-mail).
+
+4. BASE LEGAL  
+   4.1. Consentimento (LGPD Art. 7º, I) — no momento do cadastro.  
+   4.2. Execução de contrato (LGPD Art. 7º, V) — para fornecer acesso à API.  
+   4.3. Cumprimento de obrigação legal ou regulatória (LGPD Art. 7º, II).
+
+5. COMPARTILHAMENTO DE DADOS  
+   Não compartilhamos seus dados pessoais com terceiros, exceto:  
+   a) Quando exigido por lei ou ordem judicial.  
+   b) Com provedores de infraestrutura (Vercel e Supabase), que se obrigam a proteger as informações.
+
+6. RETENÇÃO E ELIMINAÇÃO  
+   6.1. Seus dados são mantidos enquanto sua conta estiver ativa.  
+   6.2. Você pode solicitar exclusão total de sua conta e dados a qualquer momento pelo e-mail privacidade@seudominio.com.
+
+7. DIREITOS DO TITULAR  
+   Você tem, a qualquer momento, o direito de:  
+   - Acessar seus dados pessoais.  
+   - Corrigir dados incorretos.  
+   - Solicitar a anonimização ou eliminação.  
+   - Revogar o consentimento.
+
+8. SEGURANÇA  
+   Adotamos medidas técnicas e organizacionais para proteger seus dados contra acesso não autorizado, perda ou alteração.
+
+9. CONTATO  
+   Em caso de dúvidas sobre esta Política, entre em contato pelo e-mail privacidade@seudominio.com.
+
+10. VIGÊNCIA  
+    Esta Política entra em vigor em 01/01/2025 e permanece válida até sua atualização.  

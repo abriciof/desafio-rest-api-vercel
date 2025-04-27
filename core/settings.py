@@ -1,4 +1,4 @@
-import os
+import os, sys
 import dj_database_url
 from datetime import timedelta
 from pathlib import Path
@@ -118,6 +118,14 @@ DATABASES = {
         default=os.environ.get('DATABASE_URL')
     )
 }
+
+if 'test' in sys.argv or 'test_coverage' in sys.argv:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': ':memory:',
+        }
+    }
 
 
 AUTH_PASSWORD_VALIDATORS = [

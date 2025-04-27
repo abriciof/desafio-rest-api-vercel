@@ -1,0 +1,30 @@
+TERMOS DE USO
+
+1. DEFINIÇÕES  
+   1.1. “API”: o serviço de interface de programação disponibilizado por essa aplicação.  
+   1.2. “Usuário”: qualquer pessoa física ou jurídica que utilize a API.  
+
+2. ACEITAÇÃO DOS TERMOS  
+   Ao utilizar a API, você concorda com estes Termos de Uso na versão vigente. Se não concordar, não utilize a API.
+
+3. CADASTRO E ACESSO  
+   3.1. Para acessar recursos restritos, o Usuário deve se cadastrar e confirmar o e-mail.  
+   3.2. É responsável por manter a confidencialidade de suas credenciais de acesso.
+
+4. USO PERMITIDO  
+   4.1. Você pode consumir os endpoints públicos e privados da API conforme a documentação.  
+   4.2. É proibido utilizar a API para fins ilícitos, violar direitos de terceiros ou comprometer a segurança do serviço.
+
+5. LIMITAÇÃO DE RESPONSABILIDADE  
+   5.1. A API é fornecida “no estado em que se encontra”, sem garantias de disponibilidade contínua.  
+   5.2. Em nenhuma hipótese os desenvolvedores serão responsáveis por danos indiretos, especiais, incidentais ou consequenciais.
+
+6. MODIFICAÇÕES  
+   6.1. Podemos alterar este documento a qualquer momento.  
+   6.2. A versão atualizada estará sempre disponível em /api/docs/terms/.
+
+7. LEGISLAÇÃO APLICÁVEL  
+   Estes Termos de Uso são regidos pelas leis brasileiras, com foro da comarca de sua escolha para dirimir quaisquer conflitos.
+
+8. CONTATO  
+   Para dúvidas ou sugestões, envie e-mail para suporte@seudominio.com.
