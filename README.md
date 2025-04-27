@@ -66,7 +66,26 @@ Este repositório contém uma **API RESTful** construída com **Django 4.x** e *
     python manage.py createsuperuser
     ```
 
-6. **Inicie** o servidor de desenvolvimento:
+6. **Execute** o seed para popular o sistema com usuários e itens de exemplo:
+
+    ```bash
+    python manage.py seed
+    ```
+    Este comando:
+    - Cria 5 usuários de teste, sendo 2 deles com e-mail confirmado.
+    - Cria alguns itens variados (públicos e privados) associados a esses usuários.
+
+    Usuários Criados no Seed
+
+    | Username    | Senha         | E-mail confirmado? |
+    |:------------|:--------------|:-------------------|
+    | demo_user_1 | password123    | ✅ |
+    | demo_user_2 | password123    | ✅ |
+    | demo_user_3 | password123    | ❌ |
+    | demo_user_4 | password123    | ❌ |
+    | demo_user_5 | password123    | ❌ |
+
+7. **Inicie** o servidor de desenvolvimento:
    ```bash
     python manage.py runserver
     ```
